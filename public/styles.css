@@ -1,0 +1,21 @@
+.red{
+        color: red;
+      }
+      .blue{
+        color: blue;
+      }
+      .green{
+        color: green;
+      }
+      .white{
+           -webkit-text-stroke: 1px black;
+      }
+      .black{
+        color: black;
+      }
+      .purple{
+        color: purple;
+      }
+      span {
+      box-sizing: border-box;
+    }
