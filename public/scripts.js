@@ -5,14 +5,14 @@ $(document).ready(function() {
     var obj2 = [];
 
     e.preventDefault();
-    // $.ajax({
-    //   url: "../application_controller.rb",
-    //   data: choices,
-    //   success: function(result){
-    //     var parsedResult = JSON.parse(result);
-    //     var myBio = "His name is " + parsedResult.name + ". He is " + parse$
-    //     $("#div1").html(myBio);
-    // }});
+    if (sessionStorage['secretcode'] === undefined){
+      $.ajax({
+        url: "/secretcode",
+        success: function(result){
+          sessionStorage['secretcode'] = JSON.parse(result);
+        }
+      });
+    };
 
 
 

@@ -1,27 +1,35 @@
+module MastermindGame
+  COLORS = ["red","blue","green","yellow","black","white"]
 class MastermindController
-COLORS = ["red","blue","green","yellow","black","white"]
-# enable :sessions 
-  def intialize
-    
-    x=COLORS[0]
-    return x
+ 
+
+  
+
+  # enable :sessions 
+
+  def initialize
+    # @x = COLORS[0]
   end
 end
-# class SecretCode
-#   attr_reader :code
 
-#   def initialize
-#     @code = create_code
-#   end
-#   def create_code
-#     secret = []
-#     for i in 0..3
-#       secret << COLORS.sample
-#     end
-#     secret
-#   end
-# end
-# end
+class SecretCode
+  attr_reader :code
+
+  def initialize
+    @code = create_code
+  end
+
+  def create_code
+    secret = []
+    for i in 0..3
+      secret << COLORS.sample
+    end
+    secret
+  end
+end
+
+end
+
 # class Guess
 #   attr_reader :correct_in_position, :correct_outof_position, :guess_feedback
 

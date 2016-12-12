@@ -4,8 +4,15 @@
 require 'sinatra'
 require_relative 'mastermind_controller'
 require 'pry'
+require 'json'
 
 get '/' do
-  @firstcolor = MastermindController.new
+
   erb :index
+end
+
+get '/secretcode' do
+  secretcode = (MastermindGame::SecretCode.new)
+  binding.pry
+  @secretcode = secretcode.code.to_json
 end
