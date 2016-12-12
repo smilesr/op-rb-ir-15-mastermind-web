@@ -1,21 +1,39 @@
 .red{
         color: red;
-      }
-      .blue{
+}
+.blue{
         color: blue;
-      }
-      .green{
+}
+.green{
         color: green;
-      }
-      .white{
+}
+.white{
            -webkit-text-stroke: 1px black;
-      }
-      .black{
+}
+.black{
         color: black;
-      }
-      .purple{
+}
+.purple{
         color: purple;
-      }
-      span {
+}
+span {
       box-sizing: border-box;
-    }
+}
+.opening {
+  /*font-size: 55px;*/
+  text-shadow:2px 2px #ff0000;
+  font-size: 100px;
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  line-height: 100px;
+  justify-content: center;
+  align-items: center;
+}
+.opening > h1 {
+  margin-bottom: 40px;
+}
+.opening > button {
+  display: block;
+}

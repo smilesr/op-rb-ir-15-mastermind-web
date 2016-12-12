@@ -1,6 +1,17 @@
 $(document).ready(function() {
   var arr = Array.new;
   var choices = [];
+  $(".start").on('click', function(){
+    if (sessionStorage['secretcode'] === undefined){
+      $.ajax({
+        url: "/secretcode",
+        success: function(result){
+          sessionStorage['secretcode'] = JSON.parse(result);
+        }
+      });
+    };
+    window.location.replace("/gameboard");
+  })
   $("#form1").submit(function(e) {
     var obj2 = [];
 

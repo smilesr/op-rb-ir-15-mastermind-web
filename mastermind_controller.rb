@@ -1,5 +1,7 @@
 module MastermindGame
   COLORS = ["red","blue","green","yellow","black","white"]
+
+
 class MastermindController
  
 
@@ -8,7 +10,7 @@ class MastermindController
   # enable :sessions 
 
   def initialize
-    # @x = COLORS[0]
+
   end
 end
 
@@ -30,62 +32,62 @@ end
 
 end
 
-# class Guess
-#   attr_reader :correct_in_position, :correct_outof_position, :guess_feedback
+class Guess
+  attr_reader :correct_in_position, :correct_outof_position, :guess_feedback
 
-#   def initialize(selection)
-#     @counter = 0
-#     @selection = selection
-#     @tally_colors_secret = $secret.code.each_with_object({}) do |e,h|
-#           h[e] ? h[e] += 1 : h[e] = 1
-#       end
-#     @tally_colors_selection = @selection.each_with_object({}) do |e,h|
-#           h[e] ? h[e] += 1 : h[e] = 1
-#       end
-#     @guess_feedback = guess_results
-#   end
+  def initialize(selection)
+    @counter = 0
+    @selection = selection
+    @tally_colors_secret = $secret.code.each_with_object({}) do |e,h|
+          h[e] ? h[e] += 1 : h[e] = 1
+      end
+    @tally_colors_selection = @selection.each_with_object({}) do |e,h|
+          h[e] ? h[e] += 1 : h[e] = 1
+      end
+    @guess_feedback = guess_results
+  end
 
-#   def guess_results
-#     guess=[]
-#     inpos = correct_in_position
-#     outpos = (inpos - correct_determination).abs
-#     guess.push(inpos, outpos)
+  def guess_results
+    guess=[]
+    inpos = correct_in_position
+    outpos = (inpos - correct_determination).abs
+    guess.push(inpos, outpos)
 
-#     guess
-#   end
+    guess
+  end
 
-#   private
-#     def correct_determination
-#       hsh_outcome = {}
-#       hsh_temp = {}
-#       @tally_colors_secret.each do |k,v|
-#         if @tally_colors_selection.include? k
-#           hsh_temp[k] = (v-@tally_colors_selection[k]).abs
-#         end
-#       end
+  private
+    def correct_determination
+      hsh_outcome = {}
+      hsh_temp = {}
+      @tally_colors_secret.each do |k,v|
+        if @tally_colors_selection.include? k
+          hsh_temp[k] = (v-@tally_colors_selection[k]).abs
+        end
+      end
 
-#       hsh_temp.keys.each do |k|
-#         if @tally_colors_secret[k] > hsh_temp[k]
-#           hsh_outcome[k] = (@tally_colors_secret[k]-hsh_temp[k])
-#         elsif @tally_colors_secret[k] <= hsh_temp[k]
-#           hsh_outcome[k] = @tally_colors_secret[k]
-#         end   
-#       end
-#       correct =hsh_outcome.values.inject { |sum, n| sum.to_i + n }
+      hsh_temp.keys.each do |k|
+        if @tally_colors_secret[k] > hsh_temp[k]
+          hsh_outcome[k] = (@tally_colors_secret[k]-hsh_temp[k])
+        elsif @tally_colors_secret[k] <= hsh_temp[k]
+          hsh_outcome[k] = @tally_colors_secret[k]
+        end   
+      end
+      correct =hsh_outcome.values.inject { |sum, n| sum.to_i + n }
 
-#       correct.to_i
-#     end
+      correct.to_i
+    end
 
-#     def correct_in_position
-#       @counter = 0
-#       for i in 0..3 do
-#         if $secret.code[i] == @selection[i]
-#           @counter += 1
-#         end
-#       end
-#       @counter  
-#     end 
-# end
+    def correct_in_position
+      @counter = 0
+      for i in 0..3 do
+        if $secret.code[i] == @selection[i]
+          @counter += 1
+        end
+      end
+      @counter  
+    end 
+end
 
 # class Display
 #   def initialize(positions)

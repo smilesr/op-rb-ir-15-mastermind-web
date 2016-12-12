@@ -7,12 +7,18 @@ require 'pry'
 require 'json'
 
 get '/' do
-
   erb :index
+end
+
+get '/gameboard' do
+  erb :gameboard
 end
 
 get '/secretcode' do
   secretcode = (MastermindGame::SecretCode.new)
-  binding.pry
   @secretcode = secretcode.code.to_json
+end
+
+post '/guess' do
+
 end
