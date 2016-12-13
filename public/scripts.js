@@ -26,12 +26,10 @@ $(document).ready(function() {
       }
     }
   });
-
+  // Displays the selected colors on the screen
   $( "[type=checkbox]").on('click', function(event){ 
     var clickedBox = event.target.id;
-    console.log('x1');
     if ($('#' + clickedBox).is(':checked')) {
-      console.log('x2');
       var circleColor = clickedBox;
       styles = {
         'display': 'inline-block',
@@ -44,37 +42,23 @@ $(document).ready(function() {
         styles['border']= 'black solid 1px';
       };
       var j = ($("#circle").children().length) + 1;
-      console.log(j);
-      var html = "<span class='here" + j + "'></span>";
-      console.log(html);
+      var html = "<span class='here" + j + "' data-color= '" + circleColor + "' ></span>";
       $('#circle').append(html);
       $('.here' + j).css(styles);
-      console.log('x3');
       function unCheck(){
         $('#' + clickedBox).prop('checked', false);
       }
       window.setTimeout(unCheck, 500);
-      console.log('x4');
+      
+      if (($('#circle').children().length) === 4){
+  
+        $('#submitButton').css({'color':'white', 'background-color': 'orange'});
+        $('#circle').children().each(function(i){
+          choices.push($(this).attr("data-color"));
+
+        })
+        alert(choices);
+      }
     }
-  });
-
-
-    // var styles= {};
-    // for (var j=0; j<choices.length; j++) {
-    //   var circleColor = choices[j];
-    //   styles = {
-    //     'display': 'inline-block',
-    //     'width': 25 + 'px',
-    //     'height': 25 + 'px',
-    //     'background-color': circleColor,
-    //     'border-radius': 10 + 'px'
-    //   };
-    //   if (circleColor === 'white'){
-    //     styles['border']= 'black solid 1px';
-    //   };
-    //   var html = "<span class='here" + j + "'></span>";
-    //   $('#circle').append(html);
-    //   $('.here' + j).css(styles);
-    // }          
-
+  }); 
 });
