@@ -20,5 +20,9 @@ get '/secretcode' do
 end
 
 post '/guess' do
+  response = Guess.new(params)
+  final_response = response.feedback.to_json
+ 
 
+ 
 end

@@ -17,14 +17,23 @@ $(document).ready(function() {
 
   // Submits the guess to server
   $("#form1").submit(function(e) {
-    var obj2 = [];
+    console.log('guess submitted');
     e.preventDefault();
-    var obj2=document.getElementsByClassName("source");
-    for (var i=0; i<obj2.length; i++){
-      if (obj2[i].checked){
-        choices.push(obj2[i].value);
+    $.ajax({
+      type: "POST",
+      url: "/guess",
+      // dataType: "json",
+      data: {'guessData': choices, 'secret': sessionStorage.getItem('secretcode')},
+      success: function(result){
+        console.log(result);
+        var response = JSON.parse(result);
+        var html = "<span>" + response + "</span>";
+        $('#response').append(html);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+         console.log(jqXHR.responseText)
       }
-    }
+    })
   });
   // Displays the selected colors on the screen
   $( "[type=checkbox]").on('click', function(event){ 
@@ -57,7 +66,7 @@ $(document).ready(function() {
           choices.push($(this).attr("data-color"));
 
         })
-        alert(choices);
+        console.log(choices);
       }
     }
   }); 

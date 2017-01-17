@@ -1,3 +1,5 @@
+require 'pry'
+require 'pry-byebug'
 module MastermindGame
   COLORS = ["red","blue","green","yellow","black","white"]
 
@@ -26,6 +28,7 @@ class SecretCode
     for i in 0..3
       secret << COLORS.sample
     end
+    puts secret
     secret
   end
 end
@@ -33,18 +36,24 @@ end
 end
 
 class Guess
-  attr_reader :correct_in_position, :correct_outof_position, :guess_feedback
+  attr_reader :correct_in_position, :correct_outof_position, :feedback
 
-  def initialize(selection)
+  def initialize(data)
     @counter = 0
-    @selection = selection
-    @tally_colors_secret = $secret.code.each_with_object({}) do |e,h|
+ 
+    @secret = data["secret"].split(",");
+    @selection = data["guessData"];
+
+    @tally_colors_secret = @secret.each_with_object({}) do |e,h|
           h[e] ? h[e] += 1 : h[e] = 1
       end
+
     @tally_colors_selection = @selection.each_with_object({}) do |e,h|
           h[e] ? h[e] += 1 : h[e] = 1
       end
-    @guess_feedback = guess_results
+ 
+    @feedback = guess_results
+
   end
 
   def guess_results
@@ -52,7 +61,7 @@ class Guess
     inpos = correct_in_position
     outpos = (inpos - correct_determination).abs
     guess.push(inpos, outpos)
-
+    binding.pry
     guess
   end
 
@@ -64,6 +73,7 @@ class Guess
         if @tally_colors_selection.include? k
           hsh_temp[k] = (v-@tally_colors_selection[k]).abs
         end
+   
       end
 
       hsh_temp.keys.each do |k|
@@ -73,6 +83,7 @@ class Guess
           hsh_outcome[k] = @tally_colors_secret[k]
         end   
       end
+
       correct =hsh_outcome.values.inject { |sum, n| sum.to_i + n }
 
       correct.to_i
@@ -81,7 +92,7 @@ class Guess
     def correct_in_position
       @counter = 0
       for i in 0..3 do
-        if $secret.code[i] == @selection[i]
+        if @secret[i] == @selection[i]
           @counter += 1
         end
       end
